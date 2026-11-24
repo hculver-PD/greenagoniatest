@@ -233,7 +233,7 @@ var commonFields = map[string]any{
 }
 
 var serviceMeta = map[string]map[string]any{
-	"payment-gateway":       {"namespace": "payments", "deployment": "payment-gateway", "team": "platform-payments", "runbook": "https://wiki.greenagonia.io/runbooks/payment-gateway"},
+	"payment-gateway":       {"namespace": "production", "deployment": "payment-gateway", "team": "platform-payments", "runbook": "https://wiki.greenagonia.io/runbooks/payment-gateway"},
 	"checkout-api":          {"namespace": "commerce", "deployment": "checkout-api", "team": "checkout", "runbook": "https://wiki.greenagonia.io/runbooks/checkout-api"},
 	"user-auth":             {"namespace": "identity", "deployment": "user-auth", "team": "identity", "runbook": "https://wiki.greenagonia.io/runbooks/user-auth"},
 	"product-catalog":       {"namespace": "catalog", "deployment": "product-catalog", "team": "catalog", "runbook": "https://wiki.greenagonia.io/runbooks/product-catalog"},
@@ -295,15 +295,15 @@ var scenarios = []scenario{
 		name: "bad-payment-deploy", title: "Payment Outage",
 		impact:  "Customers can't complete payment at checkout. Orders are failing and confirmation emails are backing up.",
 		affects: []string{"Customer Checkout", "Order Processing"},
-		desc:    "payment-gateway v2.4.1 cascade — payment, checkout, orders, notifications.",
+		desc:    "payment-gateway v2.14.4 cascade — payment, checkout, orders, notifications.",
 		ui:      scenarioUI{FailStep: "payment", SlowFactor: 4, ErrorCode: "GATEWAY_TIMEOUT_504", Component: "payment-gateway", UserMessage: "Our payment provider is taking too long to respond. You have not been charged."},
-		shared:  map[string]any{"release": "v2.4.1", "deploy_id": "github-deploy-412", "root_cause_service": "payment-gateway"},
+		shared:  map[string]any{"release": "v2.14.4", "deploy_id": "github-deploy-412", "root_cause_service": "payment-gateway"},
 		changes: []changeEvent{
-			ghChange("payment-gateway", "hculver-PD/payment-gateway", "v2.4.1", "alice@greenagonia.io", 1, "Refactor Amex card auth flow", "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb", map[string]any{"reviewers": []string{"bob", "carol"}, "files_changed": 14, "lines_added": 287, "lines_removed": 41}).ago(22),
+			ghChange("payment-gateway", "hculver-PD/payment-gateway", "v2.14.4", "alice@greenagonia.io", 1, "Refactor Amex card auth flow", "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb", map[string]any{"reviewers": []string{"bob", "carol"}, "files_changed": 14, "lines_added": 287, "lines_removed": 41}).ago(22),
 			ldChange("payment-gateway", "amex-new-auth-flow", "ramped", "alice@greenagonia.io", "25% rollout", "100% rollout", map[string]any{"flag_kind": "release", "targeting": "all card-brand=amex traffic"}).ago(9),
 		},
 		steps: []step{
-			alertStep(0, "payment-gateway", "Authentication failures elevated", "Card authorization requests failing for the majority of Amex transactions since the v2.4.1 deploy.", "critical", "payment-gw-prod-3", map[string]any{"release": "v2.4.1", "error_class": "java.lang.NullPointerException", "card_brand": "amex"}),
+			alertStep(0, "payment-gateway", "Authentication failures elevated", "Card authorization requests failing for the majority of Amex transactions since the v2.14.4 deploy.", "critical", "payment-gw-prod-3", map[string]any{"release": "v2.14.4", "error_class": "java.lang.NullPointerException", "card_brand": "amex"}),
 			alertStep(5, "payment-gateway", "Card processor timeouts", "Calls to the Adyen processor exceeding the 10s timeout; retries are compounding the load.", "critical", "payment-gw-prod-7", map[string]any{"processor": "adyen", "timeout_count": 184}),
 			alertStep(10, "payment-gateway", "Service health check failing", "The /healthz endpoint has failed 12 consecutive probes; instances are being pulled from the load balancer.", "critical", "payment-gw-prod-3", map[string]any{"endpoint": "/healthz", "consecutive_failures": 12}),
 			alertStep(14, "payment-gateway", "Error budget burn-rate exceeded", "Availability SLO burning 14x faster than sustainable; budget exhausted in under 2 hours at this rate.", "error", "slo-monitor", map[string]any{"slo": "payment-gateway-availability", "burn_rate_x": 14}),

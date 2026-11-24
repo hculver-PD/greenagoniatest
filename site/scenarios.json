@@ -32,7 +32,7 @@
     },
     "payment-gateway": {
       "deployment": "payment-gateway",
-      "namespace": "payments",
+      "namespace": "production",
       "runbook": "https://wiki.greenagonia.io/runbooks/payment-gateway",
       "team": "platform-payments"
     },
@@ -70,7 +70,7 @@
         "Customer Checkout",
         "Order Processing"
       ],
-      "desc": "payment-gateway v2.4.1 cascade — payment, checkout, orders, notifications.",
+      "desc": "payment-gateway v2.14.4 cascade — payment, checkout, orders, notifications.",
       "ui": {
         "fail_step": "payment",
         "slow_factor": 4,
@@ -80,13 +80,13 @@
       },
       "shared": {
         "deploy_id": "github-deploy-412",
-        "release": "v2.4.1",
+        "release": "v2.14.4",
         "root_cause_service": "payment-gateway"
       },
       "changes": [
         {
           "service": "payment-gateway",
-          "summary": "Deployed payment-gateway v2.4.1 → production (PR #1: Refactor Amex card auth flow)",
+          "summary": "Deployed payment-gateway v2.14.4 → production (PR #1: Refactor Amex card auth flow)",
           "source_tool": "GitHub Actions",
           "ago_minutes": 22,
           "custom": {
@@ -101,7 +101,7 @@
             "lines_removed": 41,
             "pr_number": 1,
             "pr_title": "Refactor Amex card auth flow",
-            "release_tag": "v2.4.1",
+            "release_tag": "v2.14.4",
             "repository": "hculver-PD/payment-gateway",
             "reviewers": [
               "bob",
@@ -159,13 +159,13 @@
           "delay_sec": 0,
           "service": "payment-gateway",
           "summary": "Authentication failures elevated",
-          "desc": "Card authorization requests failing for the majority of Amex transactions since the v2.4.1 deploy.",
+          "desc": "Card authorization requests failing for the majority of Amex transactions since the v2.14.4 deploy.",
           "severity": "critical",
           "source": "payment-gw-prod-3",
           "extra": {
             "card_brand": "amex",
             "error_class": "java.lang.NullPointerException",
-            "release": "v2.4.1"
+            "release": "v2.14.4"
           }
         },
         {
