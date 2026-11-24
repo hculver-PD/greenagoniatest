@@ -99,11 +99,17 @@ const Chaos = {
   async sendChangeEvent(integrationKey, payload) {
     if (!integrationKey) return { ok: false };
     try {
-      const res = await fetch(PD_ENDPOINT, {
+      // Change events have their own endpoint; links go at the top level, not in payload.
+      const { links, ...rest } = payload;
+      const res = await fetch("https://events.pagerduty.com/v2/change/enqueue", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ routing_key: integrationKey, event_action: "change", payload }),
+        body: JSON.stringify({ routing_key: integrationKey, payload: rest, links: links || [] }),
       });
+      if (res.status !== 202) {
+        const data = await res.json().catch(() => ({}));
+        this.logEvent("error", `PD rejected change event (${res.status}): ${data.message || ""}`);
+      }
       return { ok: res.status === 202 };
     } catch (err) {
       return { ok: false, reason: err.message };
