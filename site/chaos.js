@@ -108,7 +108,7 @@ const Chaos = {
       });
       if (res.status !== 202) {
         const data = await res.json().catch(() => ({}));
-        this.logEvent("error", `PD rejected change event (${res.status}): ${data.message || ""}`);
+        this.logEvent("error", `PD rejected change event (${res.status}) [${payload.source}, key …${integrationKey.slice(-4)}, len ${integrationKey.length}]: ${data.message || ""} ${JSON.stringify(data.errors || "")}`);
       }
       return { ok: res.status === 202 };
     } catch (err) {
