@@ -297,10 +297,10 @@ var scenarios = []scenario{
 		affects: []string{"Customer Checkout", "Order Processing"},
 		desc:    "payment-gateway v2.14.4 cascade — payment, checkout, orders, notifications.",
 		ui:      scenarioUI{FailStep: "payment", SlowFactor: 4, ErrorCode: "GATEWAY_TIMEOUT_504", Component: "payment-gateway", UserMessage: "Our payment provider is taking too long to respond. You have not been charged."},
-		shared:  map[string]any{"release": "v2.14.4", "deploy_id": "github-deploy-412", "root_cause_service": "payment-gateway"},
+		shared:  map[string]any{"release": "v2.14.4", "deploy_id": "github-deploy-412", "root_cause_service": "payment-gateway", "repository": "hculver-PD/payment-gateway", "pr_number": 1, "pr_url": "https://github.com/hculver-PD/payment-gateway/pull/1", "commit_sha": "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb"},
 		changes: []changeEvent{
-			ghChange("payment-gateway", "hculver-PD/payment-gateway", "v2.14.4", "alice@greenagonia.io", 1, "Refactor Amex card auth flow", "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb", map[string]any{"reviewers": []string{"bob", "carol"}, "files_changed": 14, "lines_added": 287, "lines_removed": 41}).ago(22),
-			ldChange("payment-gateway", "amex-new-auth-flow", "ramped", "alice@greenagonia.io", "25% rollout", "100% rollout", map[string]any{"flag_kind": "release", "targeting": "all card-brand=amex traffic"}).ago(9),
+			ghChange("payment-gateway", "hculver-PD/payment-gateway", "v2.14.4", "alice@greenagonia.io", 1, "Refactor Amex card auth flow", "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb", map[string]any{"reviewers": []string{"bob", "carol"}, "files_changed": 14, "lines_added": 287, "lines_removed": 41}).ago(6),
+			ldChange("payment-gateway", "amex-new-auth-flow", "ramped", "alice@greenagonia.io", "25% rollout", "100% rollout", map[string]any{"flag_kind": "release", "targeting": "all card-brand=amex traffic"}).ago(20),
 		},
 		steps: []step{
 			alertStep(0, "payment-gateway", "Authentication failures elevated", "Card authorization requests failing for the majority of Amex transactions since the v2.14.4 deploy.", "critical", "payment-gw-prod-3", map[string]any{"release": "v2.14.4", "error_class": "java.lang.NullPointerException", "card_brand": "amex"}),

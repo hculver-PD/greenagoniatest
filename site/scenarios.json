@@ -81,14 +81,18 @@
       "shared": {
         "deploy_id": "github-deploy-412",
         "release": "v2.14.4",
-        "root_cause_service": "payment-gateway"
+        "root_cause_service": "payment-gateway",
+        "repository": "hculver-PD/payment-gateway",
+        "pr_number": 1,
+        "pr_url": "https://github.com/hculver-PD/payment-gateway/pull/1",
+        "commit_sha": "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb"
       },
       "changes": [
         {
           "service": "payment-gateway",
           "summary": "Deployed payment-gateway v2.14.4 → production (PR #1: Refactor Amex card auth flow)",
           "source_tool": "GitHub Actions",
-          "ago_minutes": 22,
+          "ago_minutes": 6,
           "custom": {
             "author": "alice@greenagonia.io",
             "branch": "main",
@@ -130,7 +134,7 @@
           "service": "payment-gateway",
           "summary": "Feature flag amex-new-auth-flow ramped (25% rollout → 100% rollout)",
           "source_tool": "LaunchDarkly",
-          "ago_minutes": 9,
+          "ago_minutes": 20,
           "custom": {
             "changed_by": "alice@greenagonia.io",
             "environment": "production",
@@ -304,7 +308,7 @@
       "impact": "Customers can't log in. Product browsing and search are degraded across the site.",
       "affects": [
         "Customer Login",
-        "Browse \u0026 Discover"
+        "Browse & Discover"
       ],
       "desc": "Long-running schema migration locks user_session — auth, catalog, search, recs degrade.",
       "ui": {
@@ -326,7 +330,7 @@
           "source_tool": "GitHub Actions",
           "ago_minutes": 12,
           "custom": {
-            "actual_runtime_sec": "\u003e300 (still running)",
+            "actual_runtime_sec": ">300 (still running)",
             "author": "bob@greenagonia.io",
             "branch": "main",
             "commit_sha": "7b2e9d34c8a1f6b5e3d2c7a9b8f1e6d4c3b2a1f0",
@@ -505,9 +509,9 @@
       "title": "Recommendations Crashing",
       "impact": "Product recommendations are unavailable. Search is slower and the catalog is overloaded.",
       "affects": [
-        "Browse \u0026 Discover"
+        "Browse & Discover"
       ],
-      "desc": "recommendation-engine v3.2 leaks heap — OOM-kill loop drives load into search \u0026 catalog.",
+      "desc": "recommendation-engine v3.2 leaks heap — OOM-kill loop drives load into search & catalog.",
       "ui": {
         "fail_step": "inventory",
         "slow_factor": 3,
@@ -685,7 +689,7 @@
       "affects": [
         "Customer Login",
         "Customer Checkout",
-        "Browse \u0026 Discover"
+        "Browse & Discover"
       ],
       "desc": "Bad API-gateway config drops the Authorization header — every downstream 401s.",
       "ui": {
@@ -876,7 +880,7 @@
       "title": "Search Slowdown",
       "impact": "Search is slow and product browsing is degraded. Recommendations are serving stale results.",
       "affects": [
-        "Browse \u0026 Discover"
+        "Browse & Discover"
       ],
       "desc": "Bad TTL change in search-service — cache stampede overloads catalog.",
       "ui": {
@@ -1054,7 +1058,7 @@
       "title": "Bad Deploy Crashed Pods",
       "impact": "Recommendation pods are crash-looping. Browse experience is degraded.",
       "affects": [
-        "Browse \u0026 Discover"
+        "Browse & Discover"
       ],
       "desc": "Bad container image rollout — recommendation-engine pods CrashLoopBackOff, downstream degrades.",
       "ui": {
