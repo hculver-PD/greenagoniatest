@@ -299,7 +299,7 @@ var scenarios = []scenario{
 		ui:      scenarioUI{FailStep: "payment", SlowFactor: 4, ErrorCode: "GATEWAY_TIMEOUT_504", Component: "payment-gateway", UserMessage: "Our payment provider is taking too long to respond. You have not been charged."},
 		shared:  map[string]any{"release": "v2.4.1", "deploy_id": "github-deploy-412", "root_cause_service": "payment-gateway"},
 		changes: []changeEvent{
-			ghChange("payment-gateway", "greenagonia/payment-gateway", "v2.4.1", "alice@greenagonia.io", 412, "Refactor Amex card auth flow", "a3f9c12ee45b8a2c1d9f8b3c7e5a9d1f2b6c4e8a", map[string]any{"reviewers": []string{"bob", "carol"}, "files_changed": 14, "lines_added": 287, "lines_removed": 41}).ago(22),
+			ghChange("payment-gateway", "hculver-PD/payment-gateway", "v2.4.1", "alice@greenagonia.io", 1, "Refactor Amex card auth flow", "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb", map[string]any{"reviewers": []string{"bob", "carol"}, "files_changed": 14, "lines_added": 287, "lines_removed": 41}).ago(22),
 			ldChange("payment-gateway", "amex-new-auth-flow", "ramped", "alice@greenagonia.io", "25% rollout", "100% rollout", map[string]any{"flag_kind": "release", "targeting": "all card-brand=amex traffic"}).ago(9),
 		},
 		steps: []step{

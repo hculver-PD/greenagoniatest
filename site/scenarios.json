@@ -86,23 +86,23 @@
       "changes": [
         {
           "service": "payment-gateway",
-          "summary": "Deployed payment-gateway v2.4.1 → production (PR #412: Refactor Amex card auth flow)",
+          "summary": "Deployed payment-gateway v2.4.1 → production (PR #1: Refactor Amex card auth flow)",
           "source_tool": "GitHub Actions",
           "ago_minutes": 22,
           "custom": {
             "author": "alice@greenagonia.io",
             "branch": "main",
-            "commit_sha": "a3f9c12ee45b8a2c1d9f8b3c7e5a9d1f2b6c4e8a",
-            "commit_short": "a3f9c12",
+            "commit_sha": "152d50dddd3a63e85cd5dd81cbfd854fe1a3f7eb",
+            "commit_short": "152d50d",
             "deploy_status": "success",
             "deployed_to": "production",
             "files_changed": 14,
             "lines_added": 287,
             "lines_removed": 41,
-            "pr_number": 412,
+            "pr_number": 1,
             "pr_title": "Refactor Amex card auth flow",
             "release_tag": "v2.4.1",
-            "repository": "greenagonia/payment-gateway",
+            "repository": "hculver-PD/payment-gateway",
             "reviewers": [
               "bob",
               "carol"
@@ -113,15 +113,15 @@
           },
           "links": [
             {
-              "href": "https://github.com/greenagonia/payment-gateway/pull/412",
-              "text": "PR #412"
+              "href": "https://github.com/hculver-PD/payment-gateway/pull/1",
+              "text": "PR #1"
             },
             {
-              "href": "https://github.com/greenagonia/payment-gateway/commit/a3f9c12",
-              "text": "Commit a3f9c12"
+              "href": "https://github.com/hculver-PD/payment-gateway/commit/152d50d",
+              "text": "Commit 152d50d"
             },
             {
-              "href": "https://github.com/greenagonia/payment-gateway/actions/workflows/deploy.yml",
+              "href": "https://github.com/hculver-PD/payment-gateway/actions/workflows/deploy.yml",
               "text": "CI deploy workflow"
             }
           ]
